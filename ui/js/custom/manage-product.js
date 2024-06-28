@@ -11,7 +11,7 @@ $(function () {
           '" data-name="' +
           product.name +
           '" data-unit="' +
-          product.uom_id +
+          product.unit_id +
           '" data-price="' +
           product.price_per_unit +
           '">' +
@@ -19,7 +19,7 @@ $(function () {
           product.name +
           "</td>" +
           "<td>" +
-          product.uom_name +
+          product.unit_name +
           "</td>" +
           "<td>" +
           product.price_per_unit +
@@ -37,7 +37,7 @@ $("#saveProduct").on("click", function () {
   var data = $("#productForm").serializeArray();
   var requestPayload = {
     product_name: null,
-    uom_id: null,
+    unit_id: null,
     price_per_unit: null,
   };
   for (var i = 0; i < data.length; ++i) {
@@ -47,7 +47,7 @@ $("#saveProduct").on("click", function () {
         requestPayload.product_name = element.value;
         break;
       case "uoms":
-        requestPayload.uom_id = element.value;
+        requestPayload.unit_id = element.value;
         break;
       case "price":
         requestPayload.price_per_unit = element.value;
@@ -85,7 +85,7 @@ productModal.on("show.bs.modal", function () {
       var options = '<option value="">--Select--</option>';
       $.each(response, function (index, uom) {
         options +=
-          '<option value="' + uom.uom_id + '">' + uom.uom_name + "</option>";
+          '<option value="' + uom.unit_id + '">' + uom.unit_name + "</option>";
       });
       $("#uoms").empty().html(options);
     }
