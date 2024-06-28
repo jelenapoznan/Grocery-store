@@ -14,9 +14,9 @@ def get_all_products():
                 SELECT * FROM product
                 INNER JOIN unit
                 ON product.unit_id = unit.unit_id''')
-    products = cur.fetchall()
+    response = cur.fetchall()
     cur.close()
-    return products
+    return response
   except(Exception, psycopg2.DatabaseError) as error:
     print(error)
   finally:
