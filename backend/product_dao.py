@@ -66,5 +66,5 @@ def delete_product(product_id):
         if conn is not None:
             conn.close()
 
-# if __name__ == '__main__':
-  # print(delete_product(product_id))
+#if __name__ == '__main__':
+   #print(get_all_products())
