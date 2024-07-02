@@ -59,7 +59,9 @@ $("#saveProduct").on("click", function () {
   });
 });
 
+// Delete Product
 $(document).on("click", ".delete-product", function () {
+  console.log("Delete button clicked"); // Check if this logs when you click the button
   var tr = $(this).closest("tr");
   var data = {
     product_id: tr.data("id"),
@@ -68,6 +70,7 @@ $(document).on("click", ".delete-product", function () {
     "Are you sure to delete " + tr.data("name") + " item?"
   );
   if (isDelete) {
+    console.log("Sending delete request for product ID:", data.product_id);
     callApi("POST", productDeleteApiUrl, data);
   }
 });

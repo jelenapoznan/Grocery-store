@@ -46,6 +46,7 @@ def insert_new_product(product):
 
 def delete_product(product_id):
    conn = None
+   print('product_id',product_id)
    try:
       params = config()
       conn = psycopg2.connect(**params)
@@ -58,12 +59,12 @@ def delete_product(product_id):
       affected_rows = cur.rowcount  # Check how many rows were affected
       conn.commit()
       cur.close()
-      return affected_rows > 0  # Return True if the operation was successful, False otherwise
+      return affected_rows 
    except (Exception, psycopg2.DatabaseError) as error:
         print(error)
    finally:
         if conn is not None:
             conn.close()
 
-if __name__ == '__main__':
-  print(get_all_products())
+# if __name__ == '__main__':
+  # print(delete_product(product_id))
