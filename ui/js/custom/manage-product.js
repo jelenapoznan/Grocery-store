@@ -36,15 +36,16 @@ $("#saveProduct").on("click", function () {
   // If we found id value in form then update product detail
   var data = $("#productForm").serializeArray();
   var requestPayload = {
-    product_name: null,
+    name: null,
     unit_id: null,
     price_per_unit: null,
   };
+  console.log("data", data);
   for (var i = 0; i < data.length; ++i) {
     var element = data[i];
     switch (element.name) {
       case "name":
-        requestPayload.product_name = element.value;
+        requestPayload.name = element.value;
         break;
       case "uoms":
         requestPayload.unit_id = element.value;
@@ -54,6 +55,7 @@ $("#saveProduct").on("click", function () {
         break;
     }
   }
+  console.log("data 2222", requestPayload);
   callApi("POST", productSaveApiUrl, {
     data: JSON.stringify(requestPayload),
   });
@@ -74,6 +76,8 @@ $(document).on("click", ".delete-product", function () {
     callApi("POST", productDeleteApiUrl, data);
   }
 });
+
+//Close and open 'Add New Product' modal
 
 productModal.on("hide.bs.modal", function () {
   $("#id").val("0");
