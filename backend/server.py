@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, json
 from flask_cors import CORS
 import product_dao
 import uom_dao
+import order_dao
 
 app = Flask(__name__)
 CORS(app)  # This enables CORS for all domains on all routes.
@@ -31,10 +32,23 @@ def delete_product():
   response.headers.add('Access-Control-Allow-Headers', 'Authorization, Content-Type')
   return response
 
-@app.route('/insertProduct', methods = ['POST'])
-def insert_product():
+@app.route('/insertOrder', methods = ['POST'])
+def insert_order():
 
   request_payload = json.loads(request.form['data'])
+  order_id = order_dao.insert_order(request_payload)
+
+  response = jsonify({
+    'order_id' : order_id
+  })
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Authorization, Content-Type')
+  return response
+
+@app.route('/insertProduct', methods = ['POST'])
+def insert_product():
+# Data that comes form the UI will be string so we convert it to dict using  json.loads!
+  request_payload = json.loads(request.form['data']) # Data from UI
   product_id = product_dao.insert_new_product(request_payload)
 
   response = jsonify({

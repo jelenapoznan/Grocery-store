@@ -39,10 +39,11 @@ def insert_order(order):
         if conn is not None:
             conn.close()
 
+"""
 if __name__ == '__main__':
   print(insert_order({
     'customer_name' : 'Milka',
-    'total' : 60,
+    'total' : 90,
     'order_details' : [
       {
         'product_id' : 1,
@@ -57,3 +58,4 @@ if __name__ == '__main__':
     ]
   }
   ))
+"""
