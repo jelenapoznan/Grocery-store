@@ -39,6 +39,34 @@ def insert_order(order):
         if conn is not None:
             conn.close()
 
+def get_all_orders():
+    conn = None
+    try:
+        params = config()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        all_orders_qury = """SELECT * FROM orders"""
+        cur.execute(all_orders_qury)
+
+        response = []
+
+        for (order_id, customer_name, total, datetime) in cur:
+            response.append({
+                'order_id': order_id,
+                'customer_name': customer_name,
+                'total': total,
+                'datetime': datetime,
+            })
+        cur.close()
+        
+        return response
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            
+
 """
 if __name__ == '__main__':
   print(insert_order({

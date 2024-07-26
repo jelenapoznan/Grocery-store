@@ -45,6 +45,13 @@ def insert_order():
   response.headers.add('Access-Control-Allow-Headers', 'Authorization, Content-Type')
   return response
 
+@app.route('/getAllOrders', methods = ['GET'])
+def get_all_orders():
+  response = order_dao.get_all_orders()
+  response = jsonify(response)
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  return response
+
 @app.route('/insertProduct', methods = ['POST'])
 def insert_product():
 # Data that comes form the UI will be string so we convert it to dict using  json.loads!
